@@ -1,0 +1,42 @@
+version: '3'
+services:
+  app:
+    container_name: busha_app
+    build: .
+    ports: 
+      - "8080:8080"
+    restart: on-failure
+    volumes:
+      - api:/usr/src/app/
+    depends_on:
+      - db
+      - redis
+#    networks:
+#      - busha_network
+
+  db:
+    image: postgres:latest
+    container_name: busha_db
+    environment:
+      - POSTGRES_USER=busha  
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=busha_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+#    networks:
+#      - busha_network
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+#    networks:
+#      - busha_network
+  
+volumes:
+  api:
+  db:
+#networks:
+#  busha_network:
