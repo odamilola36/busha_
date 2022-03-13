@@ -54,13 +54,13 @@ func init() {
 // @license.name  MIT
 // @license.url   https://opensource.org/licenses/MIT
 
-// @host		  localhost:8080
+// @host		  52.207.233.252:8080
 // @BasePath  	  /
 func main() {
 
 	r := mux.NewRouter()
 	r.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
-		httpSwagger.URL("http://localhost:8080/swagger/doc.json"), //The url pointing to API definition
+		httpSwagger.URL("http://52.207.233.252:8080/swagger/doc.json"), //The url pointing to API definition
 	))
 
 	subrouter := r.PathPrefix("/api/v1").Subrouter()
