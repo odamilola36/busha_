@@ -18,7 +18,7 @@ type DBConfig struct {
 }
 
 var (
-	DbHost = "localhost"
+	DbHost = "db"
 	DbPort = "5432"
 	DbUser = "busha"
 	DbName = "busha_db"

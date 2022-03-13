@@ -145,14 +145,15 @@ func (c *characterService) getHeight(ch []models.Character) (float64, float64, f
 }
 
 func (c *characterService) genderFilter(gender string, ch []models.Character) ([]models.Character, error) {
-	var characters []models.Character
 	genderStr := strings.TrimSpace(strings.ToLower(gender))
 	if genderStr == "male" || genderStr == "female" || genderStr == "n\\a" {
+		var characters []models.Character
 		for _, character := range ch {
 			if strings.ToLower(character.Gender) == genderStr {
 				characters = append(characters, character)
 			}
 		}
+		return characters, nil
 	}
 	return ch, nil
 }

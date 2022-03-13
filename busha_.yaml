@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   title: "Busha_"
   contact:
-    email: "odamilola36@gmai.com"
+    email: "odamilola36@gmail.com"
 tags:
   - name: "movies"
     description: "Everything about movies"
@@ -28,10 +28,16 @@ paths:
       responses:
         "200":
           description: "Ok"
+          schema:
+            $ref: "#/definitions/Response"
         "405":
           description: "Method not supported"
+          schema:
+            $ref: "#/definitions/Response"
         "500":
           description: "Internal server error"
+          schema:
+            $ref: "#/definitions/Response"
   /comment:
     post:
       tags:

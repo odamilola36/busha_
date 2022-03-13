@@ -52,7 +52,7 @@ func main() {
 
 	srv := &http.Server{
 		Handler:      r,
-		Addr:         "127.0.0.1" + Port,
+		Addr:         "0.0.0.0" + Port,
 		WriteTimeout: 60 * time.Second,
 		ReadTimeout:  60 * time.Second,
 	}
@@ -66,7 +66,7 @@ func main() {
 
 func installRoutes(r *mux.Router) {
 	r.HandleFunc("/movies", moviesController.MovieListController).Methods("GET")
-	r.HandleFunc("/characters/{id:[1-9+]}", characterController.GetCharacters).Methods("GET")
+	r.HandleFunc("/characters/{id:[1-9]+}", characterController.GetCharacters).Methods("GET")
 	r.HandleFunc("/comments/{id:[1-9]+}", commentsController.GetAllComments).Methods("GET")
 	r.HandleFunc("/comment", commentsController.CreateComment).Methods("POST")
 	r.HandleFunc("/comment/{commentId:[1-9]+}", commentsController.DeleteComment).Methods("DELETE")
