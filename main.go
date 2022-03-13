@@ -16,6 +16,8 @@ import (
 	"time"
 )
 
+//update the main function
+
 var (
 	moviesController    controllers.MovieController
 	commentsController  controllers.CommentHandler
