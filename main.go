@@ -61,9 +61,9 @@ func main() {
 	r := mux.NewRouter()
 	r.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
 		httpSwagger.URL("http://localhost:8080/swagger/doc.json"), //The url pointing to API definition
-		httpSwagger.DeepLinking(true),
-		httpSwagger.DocExpansion("none"),
-		httpSwagger.DomID("#swagger-ui"),
+		//httpSwagger.DeepLinking(true),
+		//httpSwagger.DocExpansion("none"),
+		//httpSwagger.DomID("#swagger-ui"),
 	))
 
 	subrouter := r.PathPrefix("/api/v1").Subrouter()
@@ -84,8 +84,6 @@ func main() {
 		log.Fatal(err)
 	}
 }
-
-// Use this function to install all the routes
 
 func installRoutes(r *mux.Router) {
 	r.HandleFunc("/movies", moviesController.MovieListController).Methods("GET")
