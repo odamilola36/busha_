@@ -85,6 +85,8 @@ func main() {
 	}
 }
 
+// Use this function to install all the routes
+
 func installRoutes(r *mux.Router) {
 	r.HandleFunc("/movies", moviesController.MovieListController).Methods("GET")
 	r.HandleFunc("/characters/{id:[1-9]+}", characterController.GetCharacters).Methods("GET")
