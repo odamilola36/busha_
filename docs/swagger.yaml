@@ -1,0 +1,223 @@
+basePath: /
+definitions:
+  dto.CreateComment:
+    properties:
+      body:
+        type: string
+      movie_id:
+        type: integer
+    type: object
+  dto.Response:
+    properties:
+      data: {}
+      error: {}
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+info:
+  contact:
+    email: odamilola36
+    name: API Support
+    url: http://www.swagger.io/support
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Movie API
+  version: "1.0"
+paths:
+  /api/v1/characters/{movie_id}:
+    get:
+      description: gets all characters for a single movie
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movie_id
+        required: true
+        type: integer
+      - description: Sort by height or name or gender
+        in: query
+        name: sort_by
+        type: string
+      - description: asc or desc
+        in: query
+        name: order
+        type: string
+      - description: male, female, n/a
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: get all characters for a single movie
+  /api/v1/comment:
+    post:
+      description: gets all characters for a single movie
+      parameters:
+      - description: Comment
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateComment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Create comment for a movie
+  /api/v1/comment/{commentId}:
+    delete:
+      description: delete movie comment
+      parameters:
+      - description: Comment id
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Delete Comment for a movie
+    patch:
+      description: updates a comment for a movie
+      parameters:
+      - description: Comment data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateComment'
+      - description: Comment id
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Update comment for a movie
+  /api/v1/comment/{commentId}/{movieId}:
+    get:
+      description: gets all characters for a single movie
+      parameters:
+      - description: Comment id
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      - description: Movie id
+        in: path
+        name: movieId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Create comment for a movie
+  /api/v1/comments/{movieId}:
+    get:
+      description: gets all comments for a movie
+      parameters:
+      - description: Movie id
+        in: path
+        name: movieId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Get all comments for a movie
+  /api/v1/movies:
+    get:
+      description: Get all movies in order of their release date from earliest to
+        newest in the cache or from swapi if the cache is empty
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Get all movies
+swagger: "2.0"

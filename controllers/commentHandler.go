@@ -30,6 +30,14 @@ func NewCommentHandler(commentService service.CommentService) CommentHandler {
 	}
 }
 
+// @Summary Create comment for a movie
+// @Description  gets all characters for a single movie
+// @Produce  json
+// @Param data body dto.CreateComment true "Comment"
+// @Success 201 {object} dto.Response
+// @Failure 404 {object} dto.Response
+// @Failure 500 {object} dto.Response
+// @Router /api/v1/comment [post]
 func (h *commentHandler) CreateComment(w http.ResponseWriter, r *http.Request) {
 	var comment dto.CreateComment
 
@@ -107,6 +115,14 @@ func (h *commentHandler) CreateComment(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// @Summary Get all comments for a movie
+// @Description gets all comments for a movie
+// @Produce  json
+// @Param movieId path int true "Movie id"
+// @Success 200 {object} dto.Response
+// @Failure 404 {object} dto.Response
+// @Failure 500 {object} dto.Response
+// @Router /api/v1/comments/{movieId} [get]
 func (h *commentHandler) GetAllComments(w http.ResponseWriter, r *http.Request) {
 	pathVars := mux.Vars(r)
 	movieId, err := strconv.Atoi(pathVars["id"])
@@ -153,6 +169,15 @@ func (h *commentHandler) GetAllComments(w http.ResponseWriter, r *http.Request) 
 	return
 }
 
+// @Summary Create comment for a movie
+// @Description  gets all characters for a single movie
+// @Produce  json
+// @Param commentId path int true "Comment id"
+// @Param movieId path int true "Movie id"
+// @Success 200 {object} dto.Response
+// @Failure 404 {object} dto.Response
+// @Failure 500 {object} dto.Response
+// @Router /api/v1/comment/{commentId}/{movieId} [get]
 func (h *commentHandler) GetComment(w http.ResponseWriter, r *http.Request) {
 	pathVars := mux.Vars(r)
 	commentId, err := strconv.Atoi(pathVars["commentId"])
@@ -198,6 +223,15 @@ func (h *commentHandler) GetComment(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// @Summary Update comment for a movie
+// @Description  updates a comment for a movie
+// @Produce  json
+// @Param data body dto.CreateComment true "Comment data"
+// @Param commentId path int true "Comment id"
+// @Success 201 {object} dto.Response
+// @Failure 404 {object} dto.Response
+// @Failure 500 {object} dto.Response
+// @Router /api/v1/comment/{commentId} [patch]
 func (h *commentHandler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 	var comment dto.CreateComment
 
@@ -269,6 +303,14 @@ func (h *commentHandler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// @Summary Delete Comment for a movie
+// @Description  delete movie comment
+// @Produce  json
+// @Param commentId path int true "Comment id"
+// @Success 200 {object} dto.Response
+// @Failure 404 {object} dto.Response
+// @Failure 500 {object} dto.Response
+// @Router /api/v1/comment/{commentId} [delete]
 func (h *commentHandler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 	pathVars := mux.Vars(r)
 	commentId, err := strconv.Atoi(pathVars["commentId"])

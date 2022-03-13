@@ -21,6 +21,13 @@ func NewMovieController(m service.MoviesService) *movieController {
 	}
 }
 
+// @Summary      Get all movies
+// @Description  Get all movies in order of their release date from earliest to newest in the cache or from swapi if the cache is empty
+// @Produce  json
+// @Success 200 {object} dto.Response
+// @Failure 404 {object} dto.Response
+// @Failure 500 {object} dto.Response
+// @Router /api/v1/movies [get]
 func (m *movieController) MovieListController(w http.ResponseWriter, r *http.Request) {
 	var movies []models.Movie
 	var err error

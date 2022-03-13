@@ -3,10 +3,13 @@ package main
 import (
 	"busha_/config"
 	"busha_/controllers"
+	_ "busha_/docs"
 	"busha_/service"
 	"busha_/utils"
 	"context"
 	"github.com/gorilla/mux"
+	_ "github.com/swaggo/files"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"log"
 	"net/http"
 	"os"
@@ -41,13 +44,29 @@ func init() {
 
 }
 
+// @title        Movie API
+// @version      1.0
+
+// @contact.name   API Support
+// @contact.url    http://www.swagger.io/support
+// @contact.email  odamilola36
+
+// @license.name  MIT
+// @license.url   https://opensource.org/licenses/MIT
+
+// @host		  localhost:8080
+// @BasePath  	  /
 func main() {
 
 	r := mux.NewRouter()
+	r.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
+		httpSwagger.URL("http://localhost:8080/swagger/doc.json"), //The url pointing to API definition
+	))
 
-	installRoutes(r)
+	subrouter := r.PathPrefix("/api/v1").Subrouter()
+	installRoutes(subrouter)
 
-	r.Use(utils.RequestLogger)
+	subrouter.Use(utils.RequestLogger)
 	log.Printf("Starting API server on port %s and process id %d", Port, PID)
 
 	srv := &http.Server{
@@ -57,7 +76,6 @@ func main() {
 		ReadTimeout:  60 * time.Second,
 	}
 	err := srv.ListenAndServe()
-	log.Println("Server stopped")
 	if err != nil {
 		utils.ErrorLineLogger(err)
 		log.Fatal(err)
