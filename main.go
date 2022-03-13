@@ -60,7 +60,7 @@ func main() {
 
 	r := mux.NewRouter()
 	r.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
-		httpSwagger.URL("http://localhost:8080/swagger/doc.json"), //The url pointing to API definition
+		httpSwagger.URL("http://52.207.233.252:8080/swagger/doc.json"), //The url pointing to API definition
 		//httpSwagger.DeepLinking(true),
 		//httpSwagger.DocExpansion("none"),
 		//httpSwagger.DomID("#swagger-ui"),
