@@ -54,7 +54,7 @@ func init() {
 // @license.name  MIT
 // @license.url   https://opensource.org/licenses/MIT
 
-// @host		  localhost
+// @host		  localhost:8080
 // @BasePath  	  /
 func main() {
 
